@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/equipment', 'EquipmentController@index');
+
+Route::post('/equipment', 'EquipmentController@store');
+
+Route::delete('/equipment/{equipment}', 'EquipmentController@destroy');
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
