@@ -7,21 +7,21 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Equipment;
-class TaskController extends Controller
+class EquipmentController extends Controller
 {
     /**
      * The task repository instance.
      *
-     * @var TaskRepository
+     * @var EquipmentRepository
      */
     protected $equipments;
     /**
      * Create a new controller instance.
      *
-     * @param  TaskRepository  $equipments
+     * @param  EqipmentRepository  $equipments
      * @return void
      */
-    public function __construct(TaskRepository $equipments)
+    public function __construct(EquipmentRepository $equipments)
     {
         $this->middleware('auth');
         $this->equipments = $equipments;
@@ -61,10 +61,10 @@ class TaskController extends Controller
      * @param  Task  $task
      * @return Response
      */
-    public function destroy(Request $request, Task $task)
+    public function destroy(Request $request, Equipment $equipment)
     {
-        $this->authorize('destroy', $task);
-        $task->delete();
+        $this->authorize('destroy', $equipment);
+        $equipment->delete();
         return redirect('/equipments');
     }
 }

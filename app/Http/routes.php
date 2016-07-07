@@ -15,11 +15,11 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/equipment', 'EquipmentController@index');
+Route::get('/equipments', 'EquipmentController@index');
 
-Route::post('/equipment', 'EquipmentController@store');
+Route::post('/equipments', 'EquipmentController@store');
 
-Route::delete('/equipment/{equipment}', 'EquipmentController@destroy');
+Route::delete('/equipments/{equipment}', 'EquipmentController@destroy');
 
 Route::auth();
 
