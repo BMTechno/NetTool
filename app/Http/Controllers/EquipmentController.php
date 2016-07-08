@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Equipment;
+use App\Repositories;
 class EquipmentController extends Controller
 {
     /**
@@ -21,7 +22,7 @@ class EquipmentController extends Controller
      * @param  EqipmentRepository  $equipments
      * @return void
      */
-    public function __construct(EquipmentRepository $equipments)
+    public function __construct(\App\Repositories\EquipmentRepository $equipments)
     {
         $this->middleware('auth');
         $this->equipments = $equipments;
@@ -58,7 +59,7 @@ class EquipmentController extends Controller
      * Destroy the given task.
      *
      * @param  Request  $request
-     * @param  Task  $task
+     * @param  Equipment  $equipment
      * @return Response
      */
     public function destroy(Request $request, Equipment $equipment)
