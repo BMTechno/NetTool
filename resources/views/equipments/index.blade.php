@@ -21,7 +21,24 @@
                             <label for="equipment-name" class="col-sm-3 control-label">Equipment</label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="name" id="task-name" class="form-control" value="{{ old('equipment') }}">
+                                <input type="text" name="name" id="task-name" class="form-control" value="{{ old('equipment_alias') }}">
+                                <br>
+                                <br>
+                            </div>
+                            <br>
+                            <label for="ssh-user" class="col-sm-3 control-label">SSH User</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="sshu" id="ssh-user" class="form-control" value="{{ old('ssh_user') }}">
+                            </div>
+
+                            <label for="ssh-password" class="col-sm-3 control-label">SSH Password</label>  
+                            <div class="col-sm-6">
+                                <input type="password" name="sshp" id="ssh-password" class="form-control" value="{{ old('ssh_password') }}">
+                            </div>
+
+                            <label for="ip-adress" class="col-sm-3 control-label">IP Adress</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="ipa" id="ip-adress" class="form-control" value="{{ old('ip_adress') }}">
                             </div>
                         </div>
 
