@@ -13,7 +13,7 @@
                     @include('common.errors')
 
                     <!-- New Task Form -->
-                    <form action="{{ url('equipment') }}" method="POST" class="form-horizontal">
+                    <form action="{{ url('equipments') }}" method="POST" class="form-horizontal">
                         {{ csrf_field() }}
 
                         <!-- Task Name -->
@@ -74,7 +74,7 @@
 
                                         <!-- Task Delete Button -->
                                         <td>
-                                            <form action="{{url('equipment/' . $equipment->id)}}" method="POST">
+                                            <form action="{{url('equipments/' . $equipment->id)}}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 

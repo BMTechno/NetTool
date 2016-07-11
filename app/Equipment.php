@@ -12,7 +12,13 @@ class Equipment extends Model
      * @var array
      */
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'equipment_alias' , 'ssh_user', 'ip_adress', 
+    ];
+
+    protected $hidden = [
+        'ssh_pass', 
+    ];
 
     public function user()
     {
