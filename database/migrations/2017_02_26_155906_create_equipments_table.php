@@ -16,7 +16,7 @@ class CreateEquipmentsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->string('equipment_name');
-            $table->integer('ip_address');
+            $table->string('ip_address');
             $table->timestamps();
         });
     }

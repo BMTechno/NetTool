@@ -13,7 +13,7 @@ class Equipment extends Model
      */
 
     protected $fillable = [
-        'equipment_name' , 'ip_adress', 
+        'equipment_name' , 'ip_address', 
     ];
 
     protected $table = "equipments";
@@ -25,5 +25,10 @@ class Equipment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function equipmentAccess()
+    {
+        return $this->hasOne(EquipmentAccess::class);
     }
 }

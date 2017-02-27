@@ -15,6 +15,7 @@ class EquipmentRepository
     public function forUser(User $user)
     {
         return $user->equipments()
+                    // ->with('equipments_accesses')
                     ->orderBy('created_at', 'asc')
                     ->get();
     }
