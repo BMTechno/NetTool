@@ -18,6 +18,7 @@ Route::get('/', function () {
 //Route::get('/equipments', 'EquipmentController@index');
 
 Route::get('/equipment', 'EquipmentController@index');
+Route::get('/equipment/{equipment}', 'EquipmentController@view');
 
 //Route::post('/equipments', 'EquipmentController@store');
 

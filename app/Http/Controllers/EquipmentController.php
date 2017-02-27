@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 
 use App\Equipment;
 use App\DeviceModel;
+use App\Command;
+use App\ModelCommand;
 use App\EquipmentAccess;
 use App\Repositories;
 class EquipmentController extends Controller
@@ -42,6 +44,17 @@ class EquipmentController extends Controller
             'deviceModels' => DeviceModel::all(),
         ]);
     }
+
+    public function view (Request $request, $id) 
+    {
+        return view('equipments.info', [
+            'equipments' => $this->equipments->forUser($request->user()),
+            'id' => $id,
+            'deviceModels' => DeviceModel::all(),
+            'commands' => Command::all(),
+            'modelCommands' => ModelCommand::all(),
+        ]);
+    }
     /**
      * Create a new task.
      *
@@ -56,11 +69,15 @@ class EquipmentController extends Controller
             'ssh_password' => 'required|max:255',
             'equipment_name' => 'required|max:255',
             'ip_address' => 'required|max:255',
+            'model_name' => 'required|max:255',
         ]);
         $equipment = $request->user()->equipments()->create([
             'equipment_name' => $request->equipment_name,
             'ip_address' => $request->ip_address,
+            'model_id' => $request->model_name,
         ]);
+        // var_dump($request);
+        // die();
         $equipmentAccess->equipment_id = $equipment->id;
         $equipmentAccess->ssh_user = $request->ssh_user;
         $equipmentAccess->ssh_password = $request->ssh_password;

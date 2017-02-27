@@ -14,13 +14,13 @@ use App\Repositories;
 
 class RemoteController extends Controller
 {
-    public function getConnect(){
+    public function getConnect($host, $username, $password){
 
     	$connection = new Remote([
-    		'host' => ,
+    		'host' => $host,
     		'port' => '22',
-    		'username' => ,
-    		'password' => ,
+    		'username' => $username,
+    		'password' => $password,
     	]);
 
     }

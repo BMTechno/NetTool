@@ -13,7 +13,7 @@ class Equipment extends Model
      */
 
     protected $fillable = [
-        'equipment_name' , 'ip_address', 
+        'equipment_name' , 'ip_address', 'model_id',
     ];
 
     protected $table = "equipments";
