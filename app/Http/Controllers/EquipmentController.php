@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use PhanAn\Remote\Remote;
 use App\Equipment;
 use App\DeviceModel;
 use App\Command;
@@ -58,6 +59,7 @@ class EquipmentController extends Controller
             'deviceModels' => DeviceModel::all(),
             'commands' => Command::all(),
             'modelCommands' => ModelCommand::all(),
+            'ip' => '',
         ]);
     }
     /**
@@ -105,5 +107,27 @@ class EquipmentController extends Controller
         $equipmentAccess->delete();
         $equipment->delete();
         return redirect('/equipment');
+    }
+    
+    public function connect(Request $request, Equipment $equipment)
+    {
+        $connection = new Remote([
+             'host' => $equipment->ip_address,
+             'port' => 22,
+             'username' => EquipmentAccess::where('equipment_id', $equipment->id)->first()->ssh_user,
+             'password' => EquipmentAccess::where('equipment_id', $equipment->id)->first()->ssh_password,
+        ]);
+        $ip = $connection->exec($request->command);
+        if ($error = $connection->getStdError()) {
+            throw new Exception("Houston, we have a problem: $error");
+        }
+        return view('equipments.info', [
+            'equipments' => $this->equipments->forUser($request->user()),
+            'id' => $equipment->id,
+            'deviceModels' => DeviceModel::all(),
+            'commands' => Command::all(),
+            'modelCommands' => ModelCommand::all(),
+            'ip' => $ip,
+        ]); 
     }
 }

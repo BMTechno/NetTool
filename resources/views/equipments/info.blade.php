@@ -21,29 +21,35 @@
                 	@endif
                 	@endforeach
                 	<div class="form-group">
-                		<label for="commands" class="col-sm-3 control-label">Available commands:</label>
-                		<div class="col-sm-6">
-                            <select class="form-control"  name="command">
-                            @foreach ($commands as $command)
-                            @foreach ($modelCommands as $modelCommand)
-                            @if ($modelCommand->command_id == $command->id)
-                            @if ($modelCommand->model_id == $equipment->model_id)
-                          		<option value="{{ $command->command }}">{{ $command->command }}</option>
-                          	@endif
-                          	@endif
-                          	@endforeach
-                            @endforeach
-                            </select>
-                            <input type="text" name="argv" id="argv" class="form-control" placeholder="Arguments(if any)">
-                        </div>
-                		<button type="submit" class="btn btn-primary">
-							<i class="fa fa-btn fa-terminal"></i>Run
-                        </button>
+                        <form action="{{url('equipment/' . $equipment->id)}}" method="POST">
+                            {{ csrf_field() }}
+                            {{ method_field('POST') }}
+                		    <label for="commands" class="col-sm-3 control-label">Available commands:</label>
+                		    <div class="col-sm-6"> 
+                                <select class="form-control"  name="command">
+                                    @foreach ($commands as $command)
+                                    @foreach ($modelCommands as $modelCommand)
+                                    @if ($modelCommand->command_id == $command->id)
+                                    @if ($modelCommand->model_id == $equipment->model_id)
+                          		    <option value="{{ $command->command }}">{{ $command->command }}</option>
+                                    @endif
+                                    @endif
+                                    @endforeach
+                                    @endforeach
+                                </select>
+                                <input type="text" name="argv" id="argv" class="form-control" placeholder="Arguments(if any)">
+                            </div>
+                		    <button type="submit" class="btn btn-primary">
+							     <i class="fa fa-btn fa-terminal"></i>Run
+                            </button>
+                        </form>
+
                 	</div>
-                    <div class="form-group results">
-                    </div>
                 </div>
             </div>
+        </div>
+        <div class="col-sm-offset-2 col-sm-8">
+    {{ $ip }}
         </div>
     </div>
 @endif
