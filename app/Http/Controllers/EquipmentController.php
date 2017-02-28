@@ -40,7 +40,7 @@ class EquipmentController extends Controller
      */
     public function index(Request $request)
     {
-        return view('equipments.index', [
+        return view('equipments.i ndex', [
             'equipments' => $this->equipments->forUser($request->user()),
             'deviceModels' => DeviceModel::all(),
         ]);
@@ -108,7 +108,7 @@ class EquipmentController extends Controller
         $equipment->delete();
         return redirect('/equipment');
     }
-    
+
     public function connect(Request $request, Equipment $equipment)
     {
         $connection = new Remote([
