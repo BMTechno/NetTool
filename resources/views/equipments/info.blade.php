@@ -34,11 +34,14 @@
                           	@endforeach
                             @endforeach
                             </select>
+                            <input type="text" name="argv" id="argv" class="form-control" placeholder="Arguments(if any)">
                         </div>
                 		<button type="submit" class="btn btn-primary">
 							<i class="fa fa-btn fa-terminal"></i>Run
                         </button>
                 	</div>
+                    <div class="form-group results">
+                    </div>
                 </div>
             </div>
         </div>

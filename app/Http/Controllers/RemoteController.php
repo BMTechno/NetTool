@@ -14,8 +14,14 @@ use App\Repositories;
 
 class RemoteController extends Controller
 {
+	/**
+    * The method for making a connection
+    *
+    * @var EquipmentRepository
+    */
     public function getConnect($host, $username, $password){
 
+    	//Configuration of the connection
     	$connection = new Remote([
     		'host' => $host,
     		'port' => '22',
@@ -23,5 +29,9 @@ class RemoteController extends Controller
     		'password' => $password,
     	]);
 
+    	//standart error check
+    	if ($error = $connection->getStdError()) {
+            throw new Exception("Houston, we have a problem: $error");
+        }
     }
 }

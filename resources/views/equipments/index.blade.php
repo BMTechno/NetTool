@@ -110,6 +110,14 @@
                                                 </button>
                                             </form>
                                         </td>
+                                        <td>
+                                        <form action="{{url('equipment/' . $equipment->id)}}" method="GET">
+                                            {{ csrf_field() }}
+                                            {{ method_field('GET') }}
+                                            <button type="submit" id="info-equipment-{{ $equipment->id }}" class="btn btn-default">
+                                                <i class="fa fa-btn fa-pencil"></i>Info
+                                            </button>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

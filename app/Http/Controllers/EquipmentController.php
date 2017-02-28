@@ -15,7 +15,7 @@ use App\Repositories;
 class EquipmentController extends Controller
 {
     /**
-     * The task repository instance.
+     * The equipment repository instance.
      *
      * @var EquipmentRepository
      */
@@ -32,7 +32,7 @@ class EquipmentController extends Controller
         $this->equipments = $equipments;
     }
     /**
-     * Display a list of all of the user's task.
+     * Display a list of all of the user's equipments.
      *
      * @param  Request  $request
      * @return Response
@@ -44,7 +44,12 @@ class EquipmentController extends Controller
             'deviceModels' => DeviceModel::all(),
         ]);
     }
-
+    /**
+     * Display a personal page for any equipment
+     *
+     * @param  Request  $request, $id
+     * @return Response
+     */
     public function view (Request $request, $id) 
     {
         return view('equipments.info', [
@@ -56,7 +61,7 @@ class EquipmentController extends Controller
         ]);
     }
     /**
-     * Create a new task.
+     * Create a new equipment.
      *
      * @param  Request  $request
      * @return Response
@@ -71,27 +76,22 @@ class EquipmentController extends Controller
             'ip_address' => 'required|max:255',
             'model_name' => 'required|max:255',
         ]);
+
         $equipment = $request->user()->equipments()->create([
             'equipment_name' => $request->equipment_name,
             'ip_address' => $request->ip_address,
             'model_id' => $request->model_name,
         ]);
-        // var_dump($request);
-        // die();
+
         $equipmentAccess->equipment_id = $equipment->id;
         $equipmentAccess->ssh_user = $request->ssh_user;
         $equipmentAccess->ssh_password = $request->ssh_password;
         $equipmentAccess->save();
 
-        // $request->user()->equipments()->equipmentAccess()->create([
-        //     'ssh_user' => $request->ssh_user,
-        //     'ssh_password' => $request->ssh_password,
-        // ]);
-        //var_dump($request->user()->equipments());
         return redirect('/equipment');
     }
     /**
-     * Destroy the given task.
+     * Destroy the given equipment.
      *
      * @param  Request  $request
      * @param  Equipment  $equipment
@@ -102,7 +102,6 @@ class EquipmentController extends Controller
         $this->authorize('destroy', $equipment);
 
         $equipmentAccess = EquipmentAccess::where('equipment_id', $equipment->id)->first();
-        //$this->authorize('destroy', $equipmentAccess);
         $equipmentAccess->delete();
         $equipment->delete();
         return redirect('/equipment');
