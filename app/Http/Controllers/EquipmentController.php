@@ -40,7 +40,7 @@ class EquipmentController extends Controller
      */
     public function index(Request $request)
     {
-        return view('equipments.i ndex', [
+        return view('equipments.index', [
             'equipments' => $this->equipments->forUser($request->user()),
             'deviceModels' => DeviceModel::all(),
         ]);
@@ -111,16 +111,19 @@ class EquipmentController extends Controller
 
     public function connect(Request $request, Equipment $equipment)
     {
-        $connection = new Remote([
+        try {
+            $connection = new Remote([
              'host' => $equipment->ip_address,
              'port' => 22,
              'username' => EquipmentAccess::where('equipment_id', $equipment->id)->first()->ssh_user,
              'password' => EquipmentAccess::where('equipment_id', $equipment->id)->first()->ssh_password,
         ]);
-        $ip = $connection->exec($request->command);
-        if ($error = $connection->getStdError()) {
-            throw new Exception("Houston, we have a problem: $error");
+        $command = $request->command . ' ' . $request->argv;
+        $ip = $connection->exec($command);
+        } catch (Exception $e){
+            echo "Houston, we have a problem:" . $e;
         }
+
         return view('equipments.info', [
             'equipments' => $this->equipments->forUser($request->user()),
             'id' => $equipment->id,
