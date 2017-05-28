@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="col-sm-offset-2 col-sm-8">
-    {{ $ip }}
+    <pre>{{ $ip }}</pre>
         </div>
     </div>
 @endif

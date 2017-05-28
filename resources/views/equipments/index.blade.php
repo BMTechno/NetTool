@@ -117,6 +117,7 @@
                                             <button type="submit" id="info-equipment-{{ $equipment->id }}" class="btn btn-default">
                                                 <i class="fa fa-btn fa-pencil"></i>Info
                                             </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
